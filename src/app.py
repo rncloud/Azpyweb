@@ -8,12 +8,13 @@ def home():
 
 @app.route("/account", methods=["POST", "GET"])
 def account():
-    usr = "<User Not Defined>"
+    #usr = "<User Not Defined>"
     if (request.method == "POST"):
         usr = request.form["name"]
-        if not usr:
-            usr = "<User Not Defined>"
-    return render_template("account.html",username=usr)
+        if usr == "":
+            return render_template("error.html", username=usr)
+        else:
+            return render_template("account.html",username=usr)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(port=8000, host="0.0.0.0")
